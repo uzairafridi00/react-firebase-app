@@ -7,6 +7,16 @@
 5. Name your app and install the firbase library `npm install firebase`.
 6. Now paste all the config code to `config` file to connect to database.
 
+## ALL THE LIBRARIES USED
+
+```js
+
+npm install react-router-dom 
+npm install firebase react-firebase-hooks
+npm install react-hook-form yup @hookform/resolvers
+
+```
+
 ## FIREBASE AUTH
 
 1. Click on Authenticator and Get Started.
@@ -19,6 +29,17 @@
 ### Checking the User Logged In
 
 ```js
+
+// Checking the User and then display the Menus according to that
+
+ {
+    !user ? (
+            <Link to="/login">Login</Link>
+        ): (
+            <Link to="/create-post">Create Post</Link>
+        )
+ }
+
 
 {user && (
         <>
@@ -34,5 +55,45 @@
           </div>
         </>
       )}
+
+```
+
+
+## Now Create Database
+
+1. Build -> FireStore Database -> Create Database
+
+
+## FireStore Rules
+
+### Default Rule Set by FireStore
+
+```js
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
+
+```
+
+
+### Setting the Rule for Auth User
+
+```js
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow write, delete, update: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow read: if request.auth != null;
+   }
+  }
+}
 
 ```

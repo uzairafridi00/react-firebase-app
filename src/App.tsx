@@ -3,6 +3,8 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import './App.css';
 import { Main } from './pages/Main';
 import { Login } from './pages/Login';
+import { CreatePost } from './pages/create-post/CreatePost';
+
 import {Navbar} from "./components/Navbar"
 
 function App() {
@@ -13,6 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />}></Route>
           <Route path='/login' element={<Login />}></Route>
+          <Route path='/create-post' element={<CreatePost />}></Route>
           <Route path='*' element={<h1>404 Page Not Found</h1>}></Route>
         </Routes>
       </Router>
