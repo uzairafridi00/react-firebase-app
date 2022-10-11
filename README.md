@@ -97,3 +97,19 @@ service cloud.firestore {
 }
 
 ```
+
+### Setting the Rule for Deleting if User is Auth
+
+
+```js
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+      allow write,update: if request.auth != null && request.auth.uid == request.resource.data.userId;
+      allow read,delete: if request.auth != null;
+   }
+  }
+}
+
+```
